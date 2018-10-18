@@ -1,0 +1,19 @@
+
+.ownerListContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-direction: column;
+}
+.table {
+    margin: 50px;
+    max-width : 750px;
+}
+.tableContainer {}
+#loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
