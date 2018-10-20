@@ -2,7 +2,7 @@
 <template>
     <div id="loading">
         <div class="dot-bricks"></div>
-        <h2>Loading</h2>
+        <h2>{{loadingMessage}}</h2>
     </div>
 </template>
 
@@ -10,5 +10,6 @@
 
 export default {
     name: 'LoadingScreen',
+    props : ['loadingMessage']
 }
 </script>

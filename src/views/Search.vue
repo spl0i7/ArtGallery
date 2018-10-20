@@ -48,12 +48,13 @@
           <td>View</td>
         </thead>
         <tbody>
+          <!-- /* eslint-disable */ -->
           <tr v-for="rec in searchResults">
             <td>{{rec.name}}</td>
             <td>{{rec.owner}}</td>
             <td>{{rec.artist}}</td>
             <td>{{rec.access_no}}</td>
-            <td><button class="btn"> View</button></td>
+            <td> <router-link class="btn waves-effect waves-light" :to="{ name: 'art', params: { id: rec.id }}" >View</router-link></td>
           </tr>
         </tbody>
       </table>
@@ -78,9 +79,6 @@ export default {
       searchResults : null,
     }
   },
-  mounted() {
-      console.log(this.selectedOwners());
-  },
   methods: {
     doSearch : function() {
 
@@ -91,9 +89,8 @@ export default {
       return this.$store.getters.selectedOwners;
     },
     checkOwner: function(i){
-
-
-      return this.selectedOwners().has(i);
+      if(this.selectedOwners()) return this.selectedOwners().has(i);
+      return false;
     },
     doAPISearch: function(query) {
       return fetch(`http://www.arthage.co.uk/api/objects?query=${query}`)
@@ -114,7 +111,9 @@ export default {
                   'owner' : dataArr[0].trim(),
                   'access_no' : dataArr[1].trim(),
                   'artist' : dataArr[2].trim(),
-                  'name' : dataArr[3].trim()
+                  'name' : dataArr[3].trim(),
+                  'id' : i.href.split('/')[5],
+                  'link' : i.href,
                 }
               );
             });
@@ -139,8 +138,9 @@ export default {
                
         });
       })
-      .catch((err)=>{
-        console.error('Fetch Error :-S', err);
+      .catch(()=>{
+        // todo : check for error
+        //console.error('Fetch Error :-S', err);
       });
     }
   }

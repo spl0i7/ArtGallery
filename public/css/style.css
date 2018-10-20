@@ -17,3 +17,8 @@
     align-items: center;
     flex-direction: column;
 }
+.artImage {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+}
