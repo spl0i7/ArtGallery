@@ -128,12 +128,15 @@ export default {
             else return '/img/404.gif';
         },
         getCondDesc: function(){
-            let splitString = this.artJSON['condition_desc'].split(/([A-Z]\. \S+, \d{1,} \S+ \d{4}:)/).filter(i => i.length > 0);
             let resultStr = [];
-            for(let i = 0; i < splitString.length-1; i+=2){
-                resultStr.push(splitString[i] + splitString[i+1]);
+            if(this.artJSON['condition_desc']){
+                let splitString = this.artJSON['condition_desc'].split(/([A-Z]\. \S+, \d{1,} \S+ \d{4}:)/).filter(i => i.length > 0);
+                for(let i = 0; i < splitString.length-1; i+=2){
+                    resultStr.push(splitString[i] + splitString[i+1]);
+                }
             }
             return resultStr;
+        
         }
     },
     data () {

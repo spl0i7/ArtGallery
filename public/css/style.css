@@ -1,5 +1,5 @@
 
-.ownerListContainer {
+.ownerListContainer, .centeredContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,7 +8,7 @@
 }
 .table {
     margin: 50px;
-    max-width : 750px;
+    max-width : 70%;
 }
 .tableContainer {}
 #loading {

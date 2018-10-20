@@ -1,45 +1,48 @@
 <template>
 
-  <div class="row ">
-    <h1>Search</h1>
-    <p>You can either do a quick search, search by accession number, search by name or search by artist</p>
-    <div class="col s12">
-      <div class="row center-align">
-        <div class="input-field col s4">
-          <i class="material-icons prefix">search</i>
-          <input id="icon_prefix" type="text" class="validate" placeholder="Search Text" v-model="searchQuery">
+  <div>
+    <div class="row">
+      <h1>Search</h1>
+      <p>You can either do a quick search, search by accession number, search by name or search by artist</p>
+      <div class="col s12">
+        <div class="row center-align">
+          <div class="input-field col s4">
+            <i class="material-icons prefix">search</i>
+            <input id="icon_prefix" type="text" class="validate" placeholder="Search Text" v-model="searchQuery" v-on:keyup.enter="doSearch">
+          </div>
+          <div class="input-field col s2">
+            <label>
+              <input type="radio" name="searchType" value="quick" v-model="searchType" checked/>
+              <span>Quick Search</span>
+            </label>
+          </div>
+          <div class="input-field col s2">
+            <label>
+              <input type="radio" name ="searchType" value="accession" v-model="searchType"/>
+              <span>Search By Accession</span>
+            </label>
+          </div>
+          <div class="input-field col s2">
+            <label>
+              <input type="radio" name="searchType" value="name" v-model="searchType"/>
+              <span>Search by Name</span>
+            </label>
+          </div>
+          <div class="input-field col s2">
+            <label>
+              <input type="radio" name="searchType" value="artist" v-model="searchType"/>
+              <span>Search by Artist</span>
+            </label>
+          </div>
         </div>
-        <div class="input-field col s2">
-          <label>
-            <input type="radio" name="searchType" value="quick" v-model="searchType" checked/>
-            <span>Quick Search</span>
-          </label>
+        <div class="row center-align">
+          <a class="waves-effect waves-light btn" @click="doSearch"><i class="material-icons left">search</i>Search</a>
         </div>
-        <div class="input-field col s2">
-          <label>
-            <input type="radio" name ="searchType" value="accession" v-model="searchType"/>
-            <span>Search By Accession</span>
-          </label>
-        </div>
-        <div class="input-field col s2">
-          <label>
-            <input type="radio" name="searchType" value="name" v-model="searchType"/>
-            <span>Search by Name</span>
-          </label>
-        </div>
-        <div class="input-field col s2">
-          <label>
-            <input type="radio" name="searchType" value="artist" v-model="searchType"/>
-            <span>Search by Artist</span>
-          </label>
-        </div>
-      </div>
-      <div class="row center-align">
-        <a class="waves-effect waves-light btn" @click="doSearch"><i class="material-icons left">search</i>Search</a>
       </div>
     </div>
-    <div class="tableContainer">
-      <table v-if="searchResults" class="striped">
+    
+    <div class="center-align centeredContainer">
+      <table v-if="searchResults" class="striped table">
         <!-- Accession number, Artist, Item, Medium, Location, Owner -->
         <thead>
           <td>Accession Number</td>
@@ -51,7 +54,7 @@
         </thead>
         <tbody>
           <!-- /* eslint-disable */ -->
-          <tr v-for="rec in searchResults">
+          <tr v-for="rec in searchResults" :key="rec.access_no">
             <td>{{rec.access_no}}</td>
             <td>{{rec.artist}}</td>
             <td>{{rec.name}}</td>

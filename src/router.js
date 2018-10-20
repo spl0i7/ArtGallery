@@ -18,10 +18,10 @@ export default new Router({
     {
       path: "/search",
       name: "about",
-      component: Search,
+      component: Search
     },
     {
-      path: '/art/:id', 
+      path: "/art/:id",
       name: "art",
       component: Art
     }
