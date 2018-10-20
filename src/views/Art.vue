@@ -10,6 +10,10 @@
 
        <table class="table">
            <tbody>
+                <tr>
+                   <td><b>Name</b></td>
+                   <td>{{this.artJSON['name']}}</td>
+               </tr>
                <tr>
                    <td><b>Owner</b></td>
                    <td>{{this.artJSON['curr_owner']}}</td>
@@ -37,10 +41,6 @@
                 <tr>
                    <td><b>Acquisition Source</b></td>
                    <td>{{this.artJSON['acq_source_address_group'][0]['acq_source']}}</td>
-               </tr>
-                <tr>
-                   <td><b>Name</b></td>
-                   <td>{{this.artJSON['name']}}</td>
                </tr>
                 <tr>
                    <td><b>Signature Date</b></td>
