@@ -40,20 +40,23 @@
     </div>
     <div class="tableContainer">
       <table v-if="searchResults" class="striped">
+        <!-- Accession number, Artist, Item, Medium, Location, Owner -->
         <thead>
+          <td>Accession Number</td>
+          <td>Artist</td>
           <td>Name</td>
           <td>Owner</td>
-          <td>Artist</td>
-          <td>Accession Number</td>
+
           <td>View</td>
         </thead>
         <tbody>
           <!-- /* eslint-disable */ -->
           <tr v-for="rec in searchResults">
+            <td>{{rec.access_no}}</td>
+            <td>{{rec.artist}}</td>
             <td>{{rec.name}}</td>
             <td>{{rec.owner}}</td>
-            <td>{{rec.artist}}</td>
-            <td>{{rec.access_no}}</td>
+
             <td> <router-link class="btn waves-effect waves-light" :to="{ name: 'art', params: { id: rec.id }}" >View</router-link></td>
           </tr>
         </tbody>
