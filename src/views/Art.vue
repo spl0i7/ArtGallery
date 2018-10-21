@@ -24,7 +24,7 @@
                </tr>
                 <tr>
                    <td><b>Primary Maker</b></td>
-                   <td>{{this.artJSON['prod_pri_person_details_group'][0]['prod_pri_person_name']}}</td>
+                   <td>{{this.artJSON['prod_pri_person_details_group'][0]['prod_pri_person_name'] }}</td>
                </tr>
                 <tr>
                    <td><b>Nationality</b></td>
@@ -97,7 +97,7 @@
                 <tr>
                    <td><b>Condition Description</b></td>
                    <td>
-                       <p v-for="desc in getCondDesc()">{{ desc }}</p>
+                       <p v-for="desc in getCondDesc()" :key="desc">{{ desc }}</p>
                     </td>
                </tr>
                
@@ -155,8 +155,32 @@ export default {
             return;
           }
           response.json().then((data)=>{
+
+
+            if(!data['valuation_group'][0]){
+                data['valuation_group']=[{}];
+            }
+
+            if(!data['insurance_closing_amv_group'][0]){
+                data['insurance_closing_amv_group']=[{}];
+            }
+            if(!data['curr_loc_details_all_parts_group'][0]){
+                data['curr_loc_details_all_parts_group']=[{}];
+            }
+            if(!data['prod_pri_person_details_group'][0]) {
+                data['prod_pri_person_details_group'] = [{}];
+            }
+            if(!data['prod_pri_date_details_group'][0]) {
+                data['prod_pri_date_details_group'] = [{}];
+            }
+            
+
+
+
             this.artJSON = data;
             this.isLoading = false;
+
+
           });
       })
       .catch(function(err) {
