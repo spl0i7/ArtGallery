@@ -2,8 +2,6 @@
   <div class="ownerListContainer">
 
     <div class="row">
-      <div class="col s4"><button class="btn" @click="selectAllBox()">All</button></div>
-      <div class="col s4 offset-s2"><button class="btn" @click="clearAllBox()">Clear</button></div>
     </div>
 
 
@@ -15,14 +13,12 @@
         </tr>
       </thead>
       <tbody>
-      <tr v-for="(owner,index) in ownersList">
-        <td>{{owner}}</td>
-        <td><label><input type="checkbox"  @click="selectOwner(owner)" :checked="selectAll"/><span></span></label></td> 
+      <tr v-for="(o,i) in ownersList">
+        <td>{{o}}</td>
+        <td><label><span><router-link :to="{ name: 'collection', params: { owner: o }}" class="btn red">View</router-link></span></label></td> 
       </tr>
       </tbody>
     </table>
-    <router-link class="btn waves-effect waves-light" to="/search" >Continue</router-link>
-
   </div>
 
 </template>
@@ -42,21 +38,6 @@ export default {
     }
   },
   methods: {
-      selectAllBox : function() {
-          this.selectAll = true;
-          this.ownersList.forEach(i=> this.selectedOwners.add(i));
-
-          this.$store.commit('change', this.selectedOwners);
-          console.log(this.$store.getters.selectedOwners);
-      },
-      clearAllBox : function() {
-        this.selectAll = false;
-        this.selectedOwners = new Set();
-
-        this.$store.commit('change', this.selectedOwners);
-        console.log(this.$store.getters.selectedOwners);
-
-      },
       selectOwner: function(i) {
 
         if(!this.selectedOwners.has(i)) this.selectedOwners.add(i);

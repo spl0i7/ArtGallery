@@ -16,8 +16,8 @@ export default new Router({
       component: Home
     },
     {
-      path: "/search",
-      name: "about",
+      path: "/collection/:owner",
+      name: "collection",
       component: Search
     },
     {

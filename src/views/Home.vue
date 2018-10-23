@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     
-    <loading-screen v-if="isLoading" loadingMessage="Loading Owners"></loading-screen>
+    <loading-screen v-if="isLoading" loadingMessage="Loading Collections"></loading-screen>
     <div v-else>
       
-      <h1>Select Owners</h1>
+      <h1>Select Collections</h1>
       <SelectOwner :ownersList="ownersList"/>
     </div>
 
