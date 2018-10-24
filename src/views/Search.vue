@@ -32,7 +32,7 @@
         <tbody>
           <!-- /* eslint-disable */ -->
           <tr v-for="rec in collections" :key="rec.access_no">
-            <td><img :src="rec.thumb" alt=""></td>
+            <td><img :src="rec.thumb"  class="artThumnail" ></td>
             <td>{{rec.access_no}}</td>
             <td>{{rec.artist}}</td>
             <td>{{rec.name}}</td>
@@ -63,32 +63,43 @@ export default {
       searchQuery: null,
       collections : []
     }
+
   },
   mounted() {
+    let ownerData = localStorage.getItem(this.$route.params.owner);
+    if(ownerData) {
+      this.collections = JSON.parse(ownerData);
+    }
+    else {
 
-    fetch(`http://www.arthage.co.uk/api/objects?query=OWNER\\${this.$route.params.owner}`)
+    fetch(`http://www.arthage.co.uk/api/objects?query=OWNER\\${this.$route.params.owner.split(' ')[0]}&fields="av_image_ref_export,accession_no,name,prod_pri_person_details_group,taxon_details_group,hist_loc_group"`)
+
         .then((response)=>{
           if (response.status !== 200) {
             return;
           }
           response.json().then((data)=>{
-            this.rawCollections = data['_links']['records'];
+            this.rawCollections = data['_embedded']['records'];
 
             /*eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
-            this.rawCollections.reduce((p, c)=> p.then(()=>fetch(c['href']).then((response)=>response.json().then((d)=> this.collections.push({
+            this.rawCollections.forEach((d)=> this.collections.push({
               'access_no' : d['accession_no'],
               'artist' : d['prod_pri_person_details_group'][0]['prod_pri_person_name'],
               'name' : d['name'],
               'classification' : d['taxon_details_group'][0]['classification'],
               'location': d['hist_loc_group'][0]['hist_loc'],
-              'thumb' : `http://www.arthage.co.uk/thumbs/${d['av_image_ref_export']}.bmp`
+              'thumb' : `http://www.arthage.co.uk/thumbs/${d['av_image_ref_export']}.bmp`,
+              'id' : d['_links']['self']['href'].split('/')[5]
 
-            }) ))), Promise.resolve());
+            }));
             
-
+            localStorage.setItem(this.$route.params.owner, JSON.stringify(this.collections));
         });
       });
+  
+  
+    }
   },
 
   methods: {
