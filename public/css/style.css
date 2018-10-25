@@ -8,7 +8,7 @@
 }
 .table {
     margin: 50px;
-    max-width : 70%;
+    max-width : 90%;
 }
 .tableContainer {}
 #loading {
@@ -24,6 +24,10 @@
 }
 .artThumnail {
     width : 100%;
-    max-width: 50px;
+    max-width: 80px;
     height: auto;
+}
+.searchbutton {
+    margin-top:25px;
+    margin-left: -60%;
 }
