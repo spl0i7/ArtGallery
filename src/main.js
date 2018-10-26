@@ -7,7 +7,7 @@ import { store } from "./store";
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 Vue.config.debug = true;
-Vue.config.offline = false;
+Vue.config.offline = true;
 
 new Vue({
   router,

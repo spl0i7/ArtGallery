@@ -15,7 +15,7 @@
       <tbody>
       <tr v-for="(o,i) in ownersList">
         <td>{{o}}</td>
-        <td><label><span><router-link :to="{ name: 'collection', params: { owner: o }}" class="btn red">View</router-link></span></label></td> 
+        <td><label><span><router-link :to="{ name: 'collection', params: { owner: o }}" class="waves-effect waves-light btn">View</router-link></span></label></td> 
       </tr>
       </tbody>
     </table>

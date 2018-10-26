@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     
-    <loading-screen v-if="isLoading" loadingMessage="Loading Collections"></loading-screen>
+    <loading-screen v-if="isLoading" loadingMessage="Loading Collection"></loading-screen>
     <div v-else>
       
       <h1>Select Collections</h1>
@@ -55,7 +55,9 @@ export default {
       this.fetchOwners();
     } else {
       this.isLoading = false;
-      this.ownersList = 'sometimes useful to emit a specific value with an event'.split(' ');
+      this.ownersList = ['DEACCESSIONED', 'OMICRON COLLECTIONS LTD', 'GEMINI ART LIMITED', 'ANTONELLO COLLECTIONS LTD',
+                          'BTB (BORJA)' , 'LEONARDO COLLECTIONS LTD', 'GAMMA COLLECTIONS LTD',  'HHTB', 'EPSILON COLLECTIONS LIMITED',
+                          'TBG Europe NV Amsterdam', 'ANSTALT ANATOL', 'CLYPSE LTD/EPSILON COLLECTIONS LTD', 'ANGARA ANSTALT/EPSILON COLL', 'ANGARA ANSTALT', 'CLIENT A'];
     }
 
   }

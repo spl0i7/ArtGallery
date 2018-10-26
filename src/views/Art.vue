@@ -50,10 +50,7 @@
                    <td><b>Edition</b></td>
                    <td>{{this.artJSON['edition']}}</td>
                </tr>
-                <tr v-if="this.artJSON['material_desc']">
-                   <td><b>Material</b></td>
-                   <td>{{this.artJSON['material_desc']}}</td>
-               </tr>
+
                 <tr v-if="this.artJSON['measure_desc']">
                    <td><b>Measure</b></td>
                    <td>{{this.artJSON['measure_desc']}}</td>
@@ -67,6 +64,10 @@
                    <td>
                        <p v-for="desc in getCondDesc()" :key="desc">{{ desc }}</p>
                     </td>
+               </tr>
+                <tr v-if="this.artJSON['material_desc']">
+                   <td><b>Material</b></td>
+                   <td>{{this.artJSON['material_desc']}}</td>
                </tr>
                 <tr v-if="this.artJSON['curr_loc_details_all_parts_group'][0]['curr_loc_all_parts']">
                    <td><b>Current Location</b></td>

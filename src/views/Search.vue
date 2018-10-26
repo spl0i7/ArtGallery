@@ -14,7 +14,7 @@
 
         <div class="col s12">
           <div class="row center-align">
-            
+            <h5>Showing {{collections.length}} records</h5>
           </div>
         </div>
       </div>
