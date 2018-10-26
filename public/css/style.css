@@ -17,6 +17,9 @@
     align-items: center;
     flex-direction: column;
 }
+.btn {
+    background-color: rgb(39, 81, 47);
+}
 .artImage {
     width: 100%;
     max-width: 200px;
@@ -30,4 +33,14 @@
 .searchbutton {
     margin-top:25px;
     margin-left: -60%;
+}
+.view-btn {
+    margin-left: -2%;
+}
+table tbody tr td {
+    word-wrap: break-word;
+    max-width: 100px;
+}
+.items {
+
 }

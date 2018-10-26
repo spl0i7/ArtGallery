@@ -5,16 +5,12 @@
     <div v-else>
       <div class="row">
         <div class="row">
-          <h3 class="col s6">{{$route.params.owner}}</h3>
-          <div class="input-field col s3">
+          <div class="col s6">
+            <h3 >{{$route.params.owner}}</h3>
+          </div>
+          <div class="input-field offset-s2 col s3">
                 <i class="material-icons prefix">search</i>
                 <input id="icon_prefix" type="text" class="validate" placeholder="Search Text" v-model="searchQuery" v-on:keyup.enter="doSearch">
-          </div>
-        </div>
-
-        <div class="col s12">
-          <div class="row center-align">
-            <h5>Showing {{collections.length}} records</h5>
           </div>
         </div>
       </div>
@@ -26,19 +22,23 @@
             <td><b>Accession</b></td>
             <td><b>Artist</b></td>
             <td><b>Name</b></td>
+            <td><b>Medium</b></td>
             <td><b>Location</b></td>
+
             <td></td>
           </thead>
           <tbody>
             <!-- /* eslint-disable */ -->
             <tr v-for="rec in filteredCollections" :key="rec.access_no">
               <td><img :src="rec.thumb"  class="artThumnail" ></td>
-              <td>{{rec.access_no}}</td>
-              <td>{{rec.artist}}</td>
-              <td>{{rec.name}}</td>
+              <td style="margin-right">{{rec.access_no}}</td>
+              <td><b>{{rec.artist}}</b> <br /> <i>({{rec.life_years}})</i></td>
+              <td >{{rec.name}}</td>
+              <td>{{rec.medium}}</td>
               <td>{{rec.location}}</td>
 
-              <td> <router-link class="btn waves-effect waves-light" :to="{ name: 'art', params: { id: rec.id }}" >View</router-link></td>
+
+              <td> <router-link class="btn waves-effect waves-light view-btn" :to="{ name: 'art', params: { id: rec.id }}" >View</router-link></td>
             </tr>
           </tbody>
         </table>
@@ -75,7 +75,7 @@ export default {
     }
     else {
 
-    fetch(`http://www.arthage.co.uk/api/objects?query=OWNER\\${this.$route.params.owner.split(' ')[0]}&fields="av_image_ref_export,accession_no,name,prod_pri_person_details_group,taxon_details_group,hist_loc_group"&limit=20`)
+    fetch(`http://www.arthage.co.uk/api/objects?query=OWNER\\${this.$route.params.owner.split(' ')[0]}&fields="av_image_ref_export,material_desc,accession_no,name,prod_pri_person_details_group,taxon_details_group,hist_loc_group,prod_pri_person_details_group"&limit=20`)
 
         .then((response)=>{
           if (response.status !== 200) {
@@ -93,7 +93,9 @@ export default {
               'classification' : d['taxon_details_group'][0]['classification'],
               'location': d['hist_loc_group'][0]['hist_loc'],
               'thumb' : `http://www.arthage.co.uk/thumbs/${d['av_image_ref_export']}.bmp`,
-              'id' : d['_links']['self']['href'].split('/')[5]
+              'id' : d['_links']['self']['href'].split('/')[5],
+              'life_years' : d['prod_pri_person_details_group'].length > 0 ?  d['prod_pri_person_details_group'][0]['prod_pri_person_lifeyears'] : null,
+              'medium': d['material_desc']
 
             }));
             
