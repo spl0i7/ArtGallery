@@ -75,7 +75,7 @@ export default {
     }
     else {
 
-    fetch(`http://www.arthage.co.uk/api/objects?query=OWNER\\${this.$route.params.owner.split(' ')[0]}&fields="av_image_ref_export,accession_no,name,prod_pri_person_details_group,taxon_details_group,hist_loc_group"`)
+    fetch(`http://www.arthage.co.uk/api/objects?query=OWNER\\${this.$route.params.owner.split(' ')[0]}&fields="av_image_ref_export,accession_no,name,prod_pri_person_details_group,taxon_details_group,hist_loc_group"&limit=20`)
 
         .then((response)=>{
           if (response.status !== 200) {
